@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.*;
 
 public class ServerUDP extends Thread {
+    // inspiration from https://www.baeldung.com/udp-in-java
     private DatagramSocket socket;
     private byte[] buf = new byte[256]; //Change size when needed
 

@@ -1,7 +1,11 @@
 package connection;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.*;
+import java.util.Random;
 
 public class ServerUDP extends Thread {
     // inspiration from https://www.baeldung.com/udp-in-java
@@ -26,7 +30,13 @@ public class ServerUDP extends Thread {
             packet = new DatagramPacket(buf, buf.length, address, port);
             String received
                     = new String(packet.getData(), 0, packet.getLength());
+            int zeroIndex = received.indexOf(0);
+            received = received.substring(0, zeroIndex);
             System.out.println(received);
+            File file = new File(String.format("test_received_%d.txt", new Random().nextInt()));
+            FileWriter writer = new FileWriter(file);
+            writer.write(received);
+            writer.close();
 
             socket.send(packet);
         } catch (IOException e) {

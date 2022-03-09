@@ -1,4 +1,4 @@
-package connection;
+package connection.tcp;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -15,6 +15,7 @@ public class Server {
 
             while (true) {
                 Socket clientSocket = serverSocket.accept();
+                // Run in Thread
                 new ServerThread(clientSocket).start();
             }
 

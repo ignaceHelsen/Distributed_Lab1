@@ -1,4 +1,4 @@
-package connection;
+package connection.udp;
 
 import java.io.*;
 import java.net.*;
@@ -18,16 +18,17 @@ public class ClientUDP {
 
     public String sendFile(String filePath) {
         try {
+            // Read file
             File file = new File(filePath);
             FileInputStream stream = new FileInputStream(file);
             byte[] buf = new byte[(int)file.length()];
             stream.read(buf);
 
+            // Create datagram with contents of file
             DatagramPacket packet = new DatagramPacket(buf, buf.length, address, 4999);
             socket.send(packet);
-            packet = new DatagramPacket(buf, buf.length);
-            socket.receive(packet);
             return new String(packet.getData(), 0, packet.getLength());
+
         } catch (IOException e) {
             e.printStackTrace();
         }

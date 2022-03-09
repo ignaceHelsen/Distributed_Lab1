@@ -1,14 +1,17 @@
-package connection;
+package connection.tcp;
 
 import java.io.*;
 import java.net.*;
 import java.util.Random;
 
+/**
+ * This class will run the server application in a Threaded environment.
+ */
 public class ServerThread extends Thread {
     private Socket socket;
 
-    private static DataOutputStream dataOutputStream = null;
-    private static DataInputStream dataInputStream = null;
+    private DataOutputStream dataOutputStream = null;
+    private DataInputStream dataInputStream = null;
 
     public ServerThread(Socket socket) {
         this.socket = socket;
@@ -28,6 +31,7 @@ public class ServerThread extends Thread {
 
         } catch (IOException ex) {
             System.out.println("Server exception: " + ex.getMessage());
+            // Since we are in a testing environment, we print the stacktrace
             ex.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();

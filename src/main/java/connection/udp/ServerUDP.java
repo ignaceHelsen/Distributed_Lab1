@@ -1,4 +1,4 @@
-package connection;
+package connection.udp;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -22,23 +22,27 @@ public class ServerUDP extends Thread {
 
     public void run() {
         try {
+            // Create the datagram
             DatagramPacket packet = new DatagramPacket(buf, buf.length);
             socket.receive(packet);
-
             InetAddress address = packet.getAddress();
             int port = packet.getPort();
+
             packet = new DatagramPacket(buf, buf.length, address, port);
             String received
                     = new String(packet.getData(), 0, packet.getLength());
+
+            // Strip trailing 0's
             int zeroIndex = received.indexOf(0);
             received = received.substring(0, zeroIndex);
             System.out.println(received);
+
+            // Write contents to file
             File file = new File(String.format("test_received_%d.txt", new Random().nextInt()));
             FileWriter writer = new FileWriter(file);
             writer.write(received);
             writer.close();
 
-            socket.send(packet);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Buffer may be to small: see line 11 in ServerUDP");

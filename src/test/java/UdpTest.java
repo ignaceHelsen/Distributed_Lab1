@@ -1,5 +1,5 @@
-import connection.ClientUDP;
-import connection.ServerUDP;
+import connection.udp.ClientUDP;
+import connection.udp.ServerUDP;
 import org.junit.*;
 
 import static org.junit.Assert.assertEquals;

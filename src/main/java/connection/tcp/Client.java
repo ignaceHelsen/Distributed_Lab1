@@ -1,4 +1,4 @@
-package connection;
+package connection.tcp;
 
 import java.io.*;
 import java.net.Socket;
@@ -10,6 +10,7 @@ public class Client {
 
     public static void main(String[] args) {
         try(Socket socket = new Socket("127.0.0.1",5000)) {
+            // Read file
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
 
@@ -23,7 +24,7 @@ public class Client {
     }
 
     private static void sendFile(String path) throws Exception{
-        int bytes = 0;
+        int bytes;
         File file = new File(path);
         FileInputStream fileInputStream = new FileInputStream(file);
 

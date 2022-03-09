@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.Socket;
 
 public class Client {
+    // https://www.codejava.net/java-se/networking/java-socket-server-examples-tcp-ip
     private static DataOutputStream dataOutputStream = null;
     private static DataInputStream dataInputStream = null;
 
@@ -29,7 +30,7 @@ public class Client {
         // send file size
         dataOutputStream.writeLong(file.length());
         // break file into chunks
-        byte[] buffer = new byte[4*1024];
+        byte[] buffer = new byte[256];
         while ((bytes=fileInputStream.read(buffer))!=-1){
             dataOutputStream.write(buffer,0,bytes);
             dataOutputStream.flush();

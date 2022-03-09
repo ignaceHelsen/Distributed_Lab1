@@ -20,8 +20,7 @@ public class ServerThread extends Thread {
 
             dataInputStream = new DataInputStream(socket.getInputStream());
             dataOutputStream = new DataOutputStream(socket.getOutputStream());
-            Random random = new Random();
-            receiveFile(String.format("test_received_%d.txt", random.nextInt()));
+            receiveFile(String.format("test_received_%d.txt", new Random().nextInt()));
 
             dataInputStream.close();
             dataOutputStream.close();

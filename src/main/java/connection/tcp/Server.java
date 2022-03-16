@@ -13,11 +13,11 @@ public class Server {
         try (ServerSocket serverSocket = new ServerSocket(5000)) {
             System.out.println("listening to port:5000");
 
-            while (true) {
-                Socket clientSocket = serverSocket.accept();
-                // Run in Thread
-                new ServerThread(clientSocket).start();
-            }
+                while (true) {
+                    Socket clientSocket = serverSocket.accept();
+                    // Run in Thread
+                    new ServerThread(clientSocket).start();
+                }
 
         } catch (Exception e) {
             e.printStackTrace();

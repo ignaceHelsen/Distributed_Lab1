@@ -10,7 +10,6 @@ import java.util.Random;
 public class ServerThread extends Thread {
     private Socket socket;
 
-    private DataOutputStream dataOutputStream = null;
     private DataInputStream dataInputStream = null;
 
     public ServerThread(Socket socket) {
@@ -21,12 +20,13 @@ public class ServerThread extends Thread {
         try {
             System.out.println(socket + " connected.");
 
+            // Create input and output stream
             dataInputStream = new DataInputStream(socket.getInputStream());
-            dataOutputStream = new DataOutputStream(socket.getOutputStream());
+
             receiveFile(String.format("test_received_%d.txt", new Random().nextInt()));
 
             dataInputStream.close();
-            dataOutputStream.close();
+
             socket.close();
 
         } catch (IOException ex) {
